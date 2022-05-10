@@ -1,0 +1,18 @@
+PRIMERA TAREA:
+
+Nos gustaría que creara un sistema de reservas muy simple, consulte las capturas de pantalla adjuntas.
+
+La primera pantalla tiene una lista dinámica de calificaciones que debe obtenerse de forma remota, el usuario puede elegir uno o varios días y un rango de tiempo. Al hacer clic en "Crear reservas", el usuario pasará a la segunda pantalla.
+
+La segunda pantalla muestra una lista de reservas a crear en función de la fecha y hora seleccionadas en la pantalla anterior y el personal disponible para cada reserva.
+
+Instrucciones:
+• La lista de calificaciones debe obtenerse de forma remota desde https://static.healthforcego.com/grades.json
+• Al hacer clic en "Crear reservas" en la primera pantalla, debería obtener una lista del personal disponible, pero para esta tarea los generará aleatoriamente.
+• Al hacer clic en "Confirmar reservas" en la segunda pantalla, se deberían publicar los datos en un servidor, pero para esta tarea, imprimirá los datos en console.log.
+Entregables:
+• Uso de componentes React.
+• Uso de la gestión estatal.
+• Algunas pruebas unitarias si es posible.
+• Siéntase libre de usar cualquier marco o biblioteca que desee y mejorarlo tanto como sea posible.
+• Envía tu proyecto en un archivo zip con todas las instrucciones para instalarlo y ejecutarlo.

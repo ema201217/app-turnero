@@ -15,17 +15,17 @@ import es from "date-fns/locale/es";
 import { Options } from "./Options";
 import { BsArrowRight } from "react-icons/bs";
 
+
 export const Form = () => {
   const [daysSelected, setDaysSelected] = useState([]);
-  const [daysDisabled, setDaysDisabled] = useState([]);
-  const [rangeTimeIn, setRangeTimeIn] = useState("");
-  const [rangeTimeEnd, setRangeTimeEnd] = useState("");
+  const [daysSaved, setDaysSaved] = useState([]);
   const [ranges, setRanges] = useState([]);
 
+  /*   const setDaysDisabled = dispatch((el)=>SET_DAY(el)); */
   useEffect(() => {
-    setDaysDisabled(JSON.parse(localStorage.getItem("daysDisabled")) || []);
-    setRanges(JSON.parse(localStorage.getItem("rangesTimes")) || []);
+    setDaysSaved(JSON.parse(localStorage.getItem("daysSaved")) || []);
   }, []);
+  /* Al cargar el componente obtenemos lo que esta almacenado en el local storage sino no un array vació */
 
   const [info, setInfo] = useState([]);
   useEffect(() => {
@@ -36,12 +36,15 @@ export const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDaysDisabled(daysSelected);
-    setRanges([rangeTimeIn, rangeTimeEnd]);
-
-    localStorage.setItem("daysDisabled", JSON.stringify(daysDisabled));
-    localStorage.setItem("rangesTimes", JSON.stringify(ranges));
+    setDaysSaved(daysSelected);
   };
+
+  const handleRanges = ({target}) => {
+    setRanges({
+      ...ranges,
+      [target.name] : target.value
+  })
+  }
 
   return (
     <Container>
@@ -65,14 +68,14 @@ export const Form = () => {
             <FormControl
               name="timeIn"
               type="time"
-              onChange={(e) => setRangeTimeIn(e.currentTarget.value)}
+              onChange={handleRanges}
               className="col"
             />
             <BsArrowRight size={20} />
             <FormControl
               name="timeEnd"
               type="time"
-              onChange={(e) => setRangeTimeEnd(e.currentTarget.value)}
+              onChange={handleRanges}
               className="col"
             />
           </Col>
@@ -92,7 +95,7 @@ export const Form = () => {
             max={10}
             selected={daysSelected}
             onSelect={setDaysSelected}
-            disabled={daysDisabled}
+            disabled={daysSaved}
           />
 
           <Button type="submit">CREATE BOOKINGS</Button>
