@@ -20,23 +20,24 @@ export const Form = () => {
   const [daysSelected, setDaysSelected] = useState([]);
   const [daysSaved, setDaysSaved] = useState([]);
   const [ranges, setRanges] = useState([]);
+  const [info, setInfo] = useState([]);
 
   /*   const setDaysDisabled = dispatch((el)=>SET_DAY(el)); */
   useEffect(() => {
-    setDaysSaved(JSON.parse(localStorage.getItem("daysSaved")) || []);
+    setDaysSaved(JSON.parse(localStorage.getItem("daysSaved")) || daysSaved);
   }, []);
   /* Al cargar el componente obtenemos lo que esta almacenado en el local storage sino no un array vació */
 
-  const [info, setInfo] = useState([]);
   useEffect(() => {
     fetch("https://static.healthforcego.com/grades.json")
       .then((res) => res.json())
       .then((result) => setInfo(result.grades));
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setDaysSaved(daysSelected);
+   await setDaysSaved(daysSelected);
+   await localStorage.setItem("daysSaved",JSON.stringify(daysSaved));
   };
 
   const handleRanges = ({target}) => {
